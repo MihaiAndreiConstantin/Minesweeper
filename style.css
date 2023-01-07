@@ -1,0 +1,17 @@
+h1 {
+    color: black;
+    font-family: 'Courier New', Courier, monospace, Arial, Helvetica, sans-serif;
+}
+
+.btn {
+    width: 100px;
+    height: 50px;
+    color: black;
+    border: 2px solid;
+}
+
+.fields {
+    width: 10;
+    height: 10px;
+    border: 1px solid black  ;
+}
