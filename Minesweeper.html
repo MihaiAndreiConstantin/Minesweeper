@@ -12,14 +12,16 @@
     <center>
         <div><br>
             <h1>Minesweeper</h1><br>
-            
+            <p style="left: auto;"></p>
         </div>
         <div style="font-family: cursive;" id="level-select">Please select your level!<br>
             <button type="button" class="btn" onclick="levelSelect(1)">Easy</button>
             <button type="button" class="btn" onclick="levelSelect(2)">Medium</button>
-            <button type="button" class="btn" onclick="levelSelect(3)">Hard</button></div>
-        <br>
+            <button type="button" class="btn" onclick="levelSelect(3)">Hard</button>
+        </div>
+        <div id="status" class="status"></div>
         <div id="gameboard" class="gameboard"></div>
+        <br>
     </center>
     <script src="Minesweeper.js"></script>
 </body>
