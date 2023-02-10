@@ -1,0 +1,76 @@
+h1 {
+    color: black;
+    font-family: 'Courier New', Courier, monospace, Arial, Helvetica, sans-serif;
+}
+
+.btn {
+    width: 100px;
+    height: 50px;
+    color: black;
+    border: 2px solid;
+}
+
+.fields {
+    width: 20px;
+    height: 20px;
+    border: 1px solid black  ;
+    background-color: transparent;
+    font-size: 5px;
+    color: transparent;
+}
+
+.gameboard {
+    width: 0px;
+    height: 0px;
+    background-color: grey;
+    border: 2px solid;
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 10px;
+}
+
+.status {
+    font-size: small;
+    background-color: grey;
+    border: 2px solid;
+    width: 0px;  
+}
+
+.mark {
+    background-color: gray;
+}
+
+.restart-btn {
+    --b: 3px;   /* border thickness */
+    --s: .45em; /* size of the corner */
+    --color: #373B44;
+    
+    padding: calc(.5em + var(--s)) calc(.9em + var(--s));
+    color: var(--color);
+    --_p: var(--s);
+    background:
+      conic-gradient(from 90deg at var(--b) var(--b),#0000 90deg,var(--color) 0)
+      var(--_p) var(--_p)/calc(100% - var(--b) - 2*var(--_p)) calc(100% - var(--b) - 2*var(--_p));
+    transition: .3s linear, color 0s, background-color 0s;
+    outline: var(--b) solid #0000;
+    outline-offset: .6em;
+    font-size: 16px;
+  
+    border: 0;
+  
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+  }
+  
+  .restart-btn:hover,
+  .restart-btn:focus-visible{
+    --_p: 0px;
+    outline-color: var(--color);
+    outline-offset: .05em;
+  }
+  
+  .restart-btn:active {
+    background: var(--color);
+    color: #fff;
+  }
