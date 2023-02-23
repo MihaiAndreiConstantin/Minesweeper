@@ -1,8 +1,6 @@
-let level = 0
 let columns = 0
 let lines = 0
 let gameboardSize = 0
-let levelSelectDiv = document.getElementById("level-select")
 let bombsNr = 0
 let bombsNrCopy = 0
 let mineMarkMode = false
@@ -11,34 +9,23 @@ let matrixID = []
 let fieldsNr = 0
 let minesPositionMatrix = []
 let gameTableMatrix = []
-
+let colors = ["", "green", "yellow", "pink", "lightcoral", "darkred", "darkred", "darkred", "darkred"]
+let size = ["", "10", "15", "20"]
+let bombs = ["", "10", "25", "50"]
 
 function levelSelect(x) {
-    if (x == 1) {
-        columns = 10
-        lines = 10
-        bombsNr = 10
-        bombsNrCopy = 10
-    } else if (x == 2) {
-        columns = 15
-        lines = 15
-        bombsNr = 25
-        bombsNrCopy = 25
-    } else {
-        columns = 20
-        lines = 20
-        bombsNr = 50
-        bombsNrCopy = 50
-    }
+    lines = parseInt(size[x])
+    columns = parseInt(size[x])
+    bombsNr = parseInt(bombs[x])
+    bombsNrCopy = parseInt(bombs[x])
     createGameboard()
     createMatrixID()
     checkMinesPozition()
     createGameTablematrix()
-
 }
 
 function createGameboard() {
-    levelSelectDiv.remove()
+    document.getElementById("level-select").remove()
     createStatus()
     createFields()
     setGameboardSize()
@@ -92,11 +79,9 @@ function createMatrixID() {
             if (i == 0 || j == 0 || i == (lines + 1) || j == (columns + 1)) {
                 matrixID[i][j] = 0
             } else {
-                if (document.getElementById(id).innerHTML == "💥") {
-                    matrixID[i][j] = id
+                matrixID[i][j] = id
+                if (document.getElementById(id).innerHTML == "💥") {   
                     createMinesPositionMatrix(i, j)
-                } else {
-                    matrixID[i][j] = id  
                 }
                 ++id;
             }
@@ -136,16 +121,8 @@ function checkNrFromFields(x) {
 }
 
 function checkFields(x) {
-    if (mineMarkMode == true) {
-        if (document.getElementById(x).style.backgroundColor == "red") {
-            document.getElementById(x).style.backgroundColor = "transparent"
-            ++bombsNr
-            updateStatus()
-        } else {
-            document.getElementById(x).style.backgroundColor = "red"
-            --bombsNr
-            updateStatus()
-        }  
+    if (mineMarkMode == true && document.getElementById(x).style.backgroundColor != "white") {
+        markUnmarkFields(x)
     } else {
         if (document.getElementById(x).style.backgroundColor != "red") {
             if (document.getElementById(x).innerHTML == "💥") {
@@ -162,7 +139,18 @@ function checkFields(x) {
     checkWin()
 }
 
-function updateStatus () {
+function markUnmarkFields(x) {
+    if (document.getElementById(x).style.backgroundColor == "red") {
+        document.getElementById(x).style.backgroundColor = "transparent"
+        ++bombsNr   
+    } else {
+        document.getElementById(x).style.backgroundColor = "red"
+        --bombsNr
+    }  
+    updateStatus()
+}
+
+function updateStatus() {
     document.getElementById("status").innerHTML = "🚩" + bombsNr + " " + '<button type="button" id="mark-bomb" class="mark" onclick="markMine()">Mark 💣</button>'
     if (mineMarkMode == true) {
         document.getElementById("mark-bomb").style.backgroundColor = "red"
@@ -196,31 +184,16 @@ function gameOver() {
 }
 
 function openFields(x) {
+    if (document.getElementById(x).style.backgroundColor == "red") {
+        ++bombsNr
+        updateStatus()
+    }
     document.getElementById(x).style.backgroundColor = "white"
     document.getElementById(x).style.border = "transparent"
-    if (document.getElementById(x).innerHTML == "1") {
-        document.getElementById(x).style.color = "green" 
-    }
-    if (document.getElementById(x).innerHTML == "2") {
-        document.getElementById(x).style.color = "yellow" 
-    }
-    if (document.getElementById(x).innerHTML == "3") {
-        document.getElementById(x).style.color = "pink" 
-    }
-    if (document.getElementById(x).innerHTML == "4") {
-        document.getElementById(x).style.color = "lightcoral" 
-    }
-    if (document.getElementById(x).innerHTML == "5") {
-        document.getElementById(x).style.color = "darkred" 
-    }
-    if (document.getElementById(x).innerHTML == "6") {
-        document.getElementById(x).style.color = "darkred" 
-    }
-    if (document.getElementById(x).innerHTML == "7") {
-        document.getElementById(x).style.color = "darkred" 
-    }
-    if (document.getElementById(x).innerHTML == "8") {
-        document.getElementById(x).style.color = "darkred" 
+    for (let i = "1"; i <= "8"; ++i) {
+        if (document.getElementById(x).innerHTML == i) {
+            document.getElementById(x).style.color = colors[parseInt(i)] 
+        }
     }
     if (document.getElementById(x).innerHTML == "💥") {
         document.getElementById(x).style.backgroundImage = "url(bomb.jpg)" 
@@ -238,8 +211,6 @@ function createGameTablematrix() {
             }
         }
     }
-    console.table(gameTableMatrix);
-    console.table(blankFieldsArray);
 }
 
 
@@ -261,7 +232,6 @@ function sarchingBlankFields(x, y) {
         for (let j = y - 1; j <= y + 1; j++) {
             if (matrixID[i][j] > 0 && gameTableMatrix[i][j] != -1) {
                 openFields(matrixID[i][j])
-                
             }
         }
     }
