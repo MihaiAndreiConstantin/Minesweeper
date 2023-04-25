@@ -237,55 +237,37 @@ function sarchingBlankFields(x, y) {
             }
         }
     }
-    if ((x - 1) >= 0)  {
-        if (gameTableMatrix[x - 1][y] == 0) {
-            gameTableMatrix[x - 1][y] = -1
-            sarchingBlankFields(x - 1, y)
-        }
+    if ((x - 1) >= 0 && gameTableMatrix[x - 1][y] == 0)  {
+        gameTableMatrix[x - 1][y] = -1
+        sarchingBlankFields(x - 1, y)
     }
-    if ((x + 1) < lines)  {
-        if (gameTableMatrix[x + 1][y] == 0) {
-            gameTableMatrix[x + 1][y] = -1
-            sarchingBlankFields(x + 1, y)
-        }
+    if ((x + 1) < lines && gameTableMatrix[x + 1][y] == 0)  {
+        gameTableMatrix[x + 1][y] = -1
+        sarchingBlankFields(x + 1, y)
     }
-    if ((y - 1) >= 0)  {
-        if (gameTableMatrix[x][y - 1] == 0) {
-            gameTableMatrix[x][y - 1] = -1
-            sarchingBlankFields(x, y - 1)
-
-        }
+    if ((y - 1) >= 0 && gameTableMatrix[x][y - 1] == 0)  {
+        gameTableMatrix[x][y - 1] = -1
+        sarchingBlankFields(x, y - 1)
     }
-    if ((y + 1) < columns)  {
-        if (gameTableMatrix[x][y + 1] == 0) {
-            gameTableMatrix[x][y + 1] = -1
-            sarchingBlankFields(x, y + 1)
-
-        }
+    if ((y + 1) < columns && gameTableMatrix[x][y + 1] == 0)  {
+        gameTableMatrix[x][y + 1] = -1
+        sarchingBlankFields(x, y + 1)
     }
-    if ((y - 1) >= 0 && (x - 1) >= 0)  {
-        if (gameTableMatrix[x - 1][y - 1] == 0) {
-            gameTableMatrix[x - 1][y - 1] = -1
-            sarchingBlankFields(x - 1, y - 1)
-        }
+    if ((y - 1) >= 0 && (x - 1) >= 0 && gameTableMatrix[x - 1][y - 1] == 0)  {
+        gameTableMatrix[x - 1][y - 1] = -1
+        sarchingBlankFields(x - 1, y - 1)
     }
-    if ((y + 1) < columns && (x + 1) < lines)  {
-        if (gameTableMatrix[x + 1][y + 1] == 0) {
-            gameTableMatrix[x + 1][y + 1] = -1
-            sarchingBlankFields(x + 1, y + 1)
-        }
+    if ((y + 1) < columns && (x + 1) < lines && gameTableMatrix[x + 1][y + 1] == 0)  {
+        gameTableMatrix[x + 1][y + 1] = -1
+        sarchingBlankFields(x + 1, y + 1)
     }
-    if ((y + 1) < columns && (x - 1) >= 0)  {
-        if (gameTableMatrix[x - 1][y + 1] == 0) {
-            gameTableMatrix[x - 1][y + 1] = -1
-            sarchingBlankFields(x - 1, y + 1)
-        }
+    if ((y + 1) < columns && (x - 1) >= 0 && gameTableMatrix[x - 1][y + 1] == 0)  {
+        gameTableMatrix[x - 1][y + 1] = -1
+        sarchingBlankFields(x - 1, y + 1)
     }
-    if ((y - 1) >= 0 && (x + 1) < lines)  {
-        if (gameTableMatrix[x + 1][y - 1] == 0) {
-            gameTableMatrix[x + 1][y - 1] = -1
-            sarchingBlankFields(x + 1, y - 1)
-        }
+    if ((y - 1) >= 0 && (x + 1) < lines && gameTableMatrix[x + 1][y - 1] == 0)  {
+        gameTableMatrix[x + 1][y - 1] = -1
+        sarchingBlankFields(x + 1, y - 1)
    }
 }
 
