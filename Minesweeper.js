@@ -38,7 +38,6 @@ function levelSelect(x) {//selecteaza levelul
     columns = parseInt(size[x])
     bombsNr = parseInt(bombs[x])
     bombsNrCopy = parseInt(bombs[x])
-    console.log(x, lines, columns, bombsNr);
     createPlayTable()
 }
 
@@ -48,6 +47,10 @@ function deleteDiv(id) { //sterge divuri
 
 function addDiv(id, content) { // adauga divuri sau update
     document.getElementById(id).innerHTML += content;
+}
+
+function updateDiv(id, content) {// updateaza div
+    document.getElementById(id).innerHTML = content;
 }
 
 function createPlayTable() {// creeaza statusul si tabla de joaca
@@ -66,10 +69,6 @@ function createPlayTable() {// creeaza statusul si tabla de joaca
     creatematrixID()
     updateMinesVicinity()
     createGameTablematrix()
-}
-
-function updateDiv(id, content) {// updateaza div
-    document.getElementById(id).innerHTML = content;
 }
 
 function increasTime() { // creonometru
@@ -103,7 +102,7 @@ function createFields() {
         let fields = '<button type="button" class="fields" id="'+ i +'" onclick="checkFields(' + i + ')">'+ fieldsNr +'</button>';
         addDiv("fields", fields)
         updateDiv(i, 0)
-        if (i % lines == 0) {
+        if (i % columns == 0) {
             addDiv("fields", endLine)
         }     
     }
@@ -118,8 +117,7 @@ function generateRandomMineLocation() {
             randomMineLocation[i] = radomNr
             updateDiv(randomMineLocation[i], "💥")
         }
-    }
-    
+    }    
 }
 
 function creatematrixID() {
@@ -173,7 +171,7 @@ function markMode() {
     }
 }
 
-function checkFields(x) {
+function checkFields(x) { //x = id
     let backgroundColor = document.getElementById(x).style.backgroundColor;
     let fieldsValue = parseInt(document.getElementById(x).innerHTML)
     if (mineMarkMode == true) {
@@ -219,7 +217,7 @@ function gameOver() {
     addDiv("fields", restartBtn)
 }
 
-function sarchingIndexOfClickedFields(x) {
+function sarchingIndexOfClickedFields(x) { //x = id
     for (let i = 0; i <= lines; ++i) {
         for (let j = 0; j <= lines; ++j) { 
             if (matrixID[i][j] == x) {
@@ -229,7 +227,7 @@ function sarchingIndexOfClickedFields(x) {
     }
 }
 
-function sarchingBlankFields(x, y) {
+function sarchingBlankFields(x, y) { // x = Line, y = column
     for (let i = x - 1; i <= x + 1; i++) {
         for (let j = y - 1; j <= y + 1; j++) {
             if (i >= 0 && j >= 0 && i < lines && j < columns) {
